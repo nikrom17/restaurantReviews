@@ -1,6 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
-
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10pt;
@@ -10,7 +14,8 @@ body,td,th,p{
 body {
 	background-color: #fdfdfd;
 	margin: 0;
-	position:relative;
+  position:relative;
+  width: 100%;
 }
 ul, li {
 	font-family: Arial, Helvetica, sans-serif;
@@ -38,6 +43,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 #maincontent {
   background-color: #f3f3f3;
   min-height: 100%;
+  width: 100vw;
   display: flex;
   flex-direction: column;
 }
@@ -100,9 +106,12 @@ nav h1 a {
     text-decoration: underline;
 }
 /* ====================== Map ====================== */
-#map {
+#map-container {
   height: 250px;
+}
+#map {
   width: 100%;
+  height: 100%;
   background-color: #ccc;
 }
 /* ====================== Restaurant Filtering ====================== */
@@ -137,7 +146,7 @@ nav h1 a {
   background-color: #f3f3f3;
   list-style: outside none none;
   margin: 0;
-  padding: 30px 15px 60px;
+  padding: 20px;
   text-align: center;
 }
 #restaurants-list li {
@@ -187,10 +196,10 @@ nav h1 a {
 
 /* ====================== Restaurant Details ====================== */
 .inside header {
-  width: 100%;
+  width: 100vw;
   z-index: 1000;
 }
-.inside #map-container {
+.inside #mapContainer {
   background: blue none repeat scroll 0 0;
   height: 250px;
   right: 0;
@@ -205,7 +214,7 @@ nav h1 a {
 .inside #footer {
   bottom: 0;
   position: absolute;
-  /* width: 50%; */
+  width: 100vw;
 }
 #restaurant-name {
   color: #f18200;
@@ -213,12 +222,13 @@ nav h1 a {
   font-size: 20pt;
   font-weight: 200;
   letter-spacing: 0;
-  margin: 20px 0;
+  margin-bottom: 30px;
   text-transform: uppercase;
   line-height: 1.1;
 }
 #restaurant-img {
-	width: 90%;
+  width: 100%;
+  margin: auto;
 }
 #restaurant-address {
   font-size: 12pt;
@@ -234,23 +244,22 @@ nav h1 a {
   padding: 2px 0;
   text-align: center;
   text-transform: uppercase;
-	width: 90%;
+	width: 100%;
 }
 #restaurant-container, #reviews-container {
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #fff;
-  padding: 0 40px 30px;
-  /* width: 50%; */
+  padding: 30px 20px;
+  overflow-y: auto;
 }
 #reviews-container {
-  padding: 30px 40px 80px;
+  padding-bottom: 80px;
 }
 #reviews-container h2 {
   color: #f58500;
   font-size: 24pt;
   font-weight: 300;
   letter-spacing: -1px;
-  padding-bottom: 1pt;
 }
 #reviews-list {
   margin: 0;
@@ -265,7 +274,6 @@ nav h1 a {
   overflow: hidden;
   padding: 20px;
   position: relative;
-  width: 85%;
 }
 #reviews-list li p {
   margin: 0 0 10px;
@@ -273,7 +281,6 @@ nav h1 a {
 #restaurant-hours td {
   color: #666;
 }
-
 
 /* ====================== Responsive Styles ====================== */
 @media screen and (min-width: 750px) {
@@ -290,8 +297,17 @@ nav h1 a {
   #restaurants-list .restaurant-img {
     max-width: 400px;
   }
+  #restaurant-container, #reviews-container {
+    margin: auto;
+  }
+  #restaurant-container img {
+    max-width: 700px;
+  }
 }
-@media screen and (min-width: 950px) {
+
+
+
+@media screen and (min-width: 900px) {
   #restaurants-list li h1 {
     font-size: 30px;
     margin: 20px 0;
@@ -299,10 +315,9 @@ nav h1 a {
   #restaurants-list .restaurant-img {
     max-width: 550px;
   }
-  #map {
-    height: 300px;
+  #map-container {
+    height: 350px;
   }
-
   #restaurants-list p {
     font-size: 20px;
     margin: 10px;
@@ -310,5 +325,29 @@ nav h1 a {
   #restaurants-list li a {
     font-size: 20px;
     margin: 30px 0 0;
+  }
+  #restaurant-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+  .inside #mapContainer {
+    width: 50%;
+    height: calc(100vh - 130px);
+    position: fixed;
+  }
+  #reviews-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+  #maincontent #restaurant-container #reviews-container #mapContainer {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .header {
+    position: fixed;
   }
 }
