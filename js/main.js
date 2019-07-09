@@ -36,6 +36,7 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     const option = document.createElement('option');
     option.innerHTML = neighborhood;
     option.value = neighborhood;
+    option.label = neighborhood;
     select.append(option);
   });
 }
@@ -64,6 +65,7 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
     const option = document.createElement('option');
     option.innerHTML = cuisine;
     option.value = cuisine;
+    option.label = cuisine;
     select.append(option);
   });
 }
@@ -166,6 +168,7 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = DBHelper.imageAltText(restaurant);
   wrapper1.append(image);
 
   const wrapper2 = document.createElement('div');
@@ -217,4 +220,8 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 } */
-
+// Register service worker
+registerServiceWorker = () => {
+  if (!navigator.serviceWorker) return;
+  navigator.serviceWorker.register('js/sw.js').then(()=> console.log('it worked!'));
+}

@@ -16,6 +16,7 @@ class DBHelper {
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
+    fetch(DBHelper.DATABASE_URL).then( (e) => console.log(e));
     let xhr = new XMLHttpRequest();
     xhr.open('GET', DBHelper.DATABASE_URL);
     xhr.onload = () => {
@@ -151,6 +152,13 @@ class DBHelper {
    */
   static imageUrlForRestaurant(restaurant) {
     return (`/img/${restaurant.photograph}`);
+  }
+  
+  /**
+   * Restaurant image Alt Text.
+   */
+  static imageAltText(restaurant) {
+    return restaurant.altText;
   }
 
   /**
